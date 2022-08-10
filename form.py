@@ -13,7 +13,7 @@ class FormRegister(FlaskForm):
         validators.DataRequired(),
         validators.Length(3, 30)
     ])
-    email = EmailField('信箱[', validators=[
+    email = EmailField('信箱', validators=[
         validators.DataRequired(),
         validators.Length(1, 50),
         validators.Email()
