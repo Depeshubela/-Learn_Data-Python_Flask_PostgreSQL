@@ -23,7 +23,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['postgresql://yuacqtdojxgkqv:
                                        #os.path.join(pjdir, 'data_register.sqlite')
 
 
-
+app.config['SECRET_KEY']='your key'
 
 db = SQLAlchemy(app)
 
