@@ -4,12 +4,14 @@ from flask_bootstrap import Bootstrap
 import os
 
 
-
-
+app = Flask(__name__)
+Bootstrap(app)
+app.config['SECRET_KEY']='your key'
+'''
 #  取得啟動文件資料夾路徑
 pjdir = os.path.abspath(os.path.dirname(__file__))
 
-app = Flask(__name__)
+
 #  新版本的部份預設為none，會有異常，再設置True即可。
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 #  設置資料庫為sqlite3
@@ -27,9 +29,9 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['postgresql://yuacqtdojxgkqv:
 
 app.config['SECRET_KEY']='your key'
 
-Bootstrap(app)
-db = SQLAlchemy(app)
-'''
+
+#db = SQLAlchemy(app)
+
 with app.app_context():
     db.create_all()
     db.session.commit()
@@ -40,19 +42,22 @@ def register():
     from model import UserReister,db
     form =FormRegister()
     if form.validate_on_submit():
+        UserReister()
         user = UserReister(
             username = form.username.data,
             email = form.email.data,
             password = form.password.data
         )
-        db.create_all()
+        
         db.session.add(user)
         db.session.commit()
         return 'Success Thank You'
+    
     return render_template('register.html', form=form)
 
 if __name__ == '__main__':
 
     app.debug = True
+    app.config['SECRET_KEY']='your key'
     app.run()
 
