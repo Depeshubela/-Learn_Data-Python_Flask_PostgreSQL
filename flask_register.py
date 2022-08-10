@@ -2,10 +2,14 @@ from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 import os
-
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField, validators, PasswordField
+from wtforms.fields import EmailField
+from flask_register import UserRegister
+from wtforms import ValidationError
 
 #  取得啟動文件資料夾路徑
-pjdir = os.path.abspath(os.path.dirname(__file__))
+#pjdir = os.path.abspath(os.path.dirname(__file__))
 
 app = Flask(__name__)
 #  新版本的部份預設為none，會有異常，再設置True即可。
@@ -39,10 +43,43 @@ class UserRegister(db.Model):
 
 
 
+class FormRegister(FlaskForm):
+    """依照Model來建置相對應的Form
+    
+    password2: 用來確認兩次的密碼輸入相同
+    """
+    username = StringField('使用者名稱', validators=[
+        validators.DataRequired(),
+        validators.Length(3, 30)
+    ])
+    email = EmailField('信箱', validators=[
+        validators.DataRequired(),
+        validators.Length(1, 50),
+        validators.Email()
+    ])
+    password = PasswordField('密碼', validators=[
+        validators.DataRequired(),
+        validators.Length(5, 10),
+        validators.EqualTo('password2', message='PASSWORD NEED MATCH')
+    ])
+    password2 = PasswordField('再次輸入密碼', validators=[
+        validators.DataRequired()
+    ])
+    submit = SubmitField('確認送出')
+
+    def validate_email(self, field):
+        if UserRegister.query.filter_by(email=field.data).first():
+            raise ValidationError('此信箱已被使用')
+
+    def validate_username(self, field):
+        if UserRegister.query.filter_by(username=field.data).first():
+            raise  ValidationError('此名稱已被使用')
+
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    from form import FormRegister
+    #from form import FormRegister
     #from model import UserRegister
     form =FormRegister()
     if form.validate_on_submit():
