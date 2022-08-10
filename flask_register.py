@@ -17,7 +17,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
                                        #os.path.join(pjdir, 'data_register.sqlite')
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL') or 'sqlite:///' + os.path.join(pjdir, 'data.sqlite')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('postgresql://yuacqtdojxgkqv:28050498cf7a8c7f569598e1b9adc03b80349dbb3e0b0d91ab328aa0156524b8@ec2-3-225-110-188.compute-1.amazonaws.com:5432/d8q79pjsluumf9') or 'sqlite:///' + os.path.join(pjdir, 'data.sqlite')
 
 
 app.config['SECRET_KEY']='your key'
