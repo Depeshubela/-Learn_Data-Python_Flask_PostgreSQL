@@ -2,10 +2,11 @@ from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 import os
-
+from flask_migrate import Migrate, MigrateCommand
+from flask_script import Manager
 
 #  取得啟動文件資料夾路徑
-pjdir = os.path.abspath(os.path.dirname(__file__))
+#pjdir = os.path.abspath(os.path.dirname(__file__))
 
 app = Flask(__name__)
 #  新版本的部份預設為none，會有異常，再設置True即可。
@@ -25,6 +26,10 @@ app.config['SECRET_KEY']='your key'
 Bootstrap(app)
 db = SQLAlchemy(app)
 #db.create_all()
+migrate = Migrate(app, db)
+
+manager = Manager(app)
+manager.add_command('db', MigrateCommand)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -43,5 +48,5 @@ def register():
     return render_template('register.html', form=form)
 
 if __name__ == '__main__':
-    app.debug = True
-    app.run()
+    manager.debug = True
+    manager.run()
