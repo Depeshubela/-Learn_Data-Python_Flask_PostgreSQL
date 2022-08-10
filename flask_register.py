@@ -11,9 +11,9 @@ import os
 
 app = Flask(__name__)
 #  新版本的部份預設為none，會有異常，再設置True即可。
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+#app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 #  設置資料庫為sqlite3
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://yuacqtdojxgkqv:28050498cf7a8c7f569598e1b9adc03b80349dbb3e0b0d91ab328aa0156524b8@ec2-3-225-110-188.compute-1.amazonaws.com:5432/d8q79pjsluumf9'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://yuacqtdojxgkqv:28050498cf7a8c7f569598e1b9adc03b80349dbb3e0b0d91ab328aa0156524b8@ec2-3-225-110-188.compute-1.amazonaws.com:5432/d8q79pjsluumf9'
 #app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['postgresql://yuacqtdojxgkqv:28050498cf7a8c7f569598e1b9adc03b80349dbb3e0b0d91ab328aa0156524b8@ec2-3-225-110-188.compute-1.amazonaws.com:5432/d8q79pjsluumf9']\
   # = 'postgresql://yuacqtdojxgkqv:28050498cf7a8c7f569598e1b9adc03b80349dbb3e0b0d91ab328aa0156524b8@ec2-3-225-110-188.compute-1.amazonaws.com:5432/d8q79pjsluumf9'
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
@@ -22,12 +22,13 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://yuacqtdojxgkqv:28050498
 
 
 
-app.config['SECRET_KEY']='your key'
+#app.config['SECRET_KEY']='your key'
 
 Bootstrap(app)
 db = SQLAlchemy(app)
-
-
+with app.app_context():
+    db.create_all()
+    db.session.commit()
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -46,6 +47,6 @@ def register():
     return render_template('register.html', form=form)
 
 if __name__ == '__main__':
-    db.create_all()
+    #db.create_all()
     app.debug = True
     app.run()
