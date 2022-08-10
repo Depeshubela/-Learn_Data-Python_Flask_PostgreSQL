@@ -22,7 +22,7 @@ app.config['SECRET_KEY']='your key'
 Bootstrap(app)
 db = SQLAlchemy(app)
 #db.create_all()
-'''
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     from form import FormRegister
@@ -42,4 +42,3 @@ def register():
 if __name__ == '__main__':
     app.debug = True
     app.run()
-    '''
