@@ -26,7 +26,7 @@ app.config['SECRET_KEY']='your key'
 
 Bootstrap(app)
 db = SQLAlchemy(app)
-#db.create_all()
+db.create_all()
 
 
 @app.route('/register', methods=['GET', 'POST'])
