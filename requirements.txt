@@ -25,3 +25,5 @@ itsdangerous
 six
 gunicorn
 psycopg2
+Werkzeug
+email_validator
