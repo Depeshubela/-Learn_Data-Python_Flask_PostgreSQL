@@ -45,6 +45,7 @@ def register():
             email = form.email.data,
             password = form.password.data
         )
+        db.create_all()
         db.session.add(user)
         db.session.commit()
         return 'Success Thank You'
@@ -55,4 +56,3 @@ if __name__ == '__main__':
     app.debug = True
     app.run()
 
-db.create_all()
