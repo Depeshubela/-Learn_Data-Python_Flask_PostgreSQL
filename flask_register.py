@@ -23,13 +23,30 @@ Bootstrap(app)
 db = SQLAlchemy(app)
 #db.create_all()
 
+
+
+class UserRegister(db.Model):
+    """記錄使用者資料的資料表"""
+    __tablename__ = 'UserRgeisters'
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    email = db.Column(db.String(80), unique=True, nullable=False)
+    password = db.Column(db.String(50), nullable=False)
+
+    def __repr__(self):
+        return 'username:%s, email:%s' % (self.username, self.email)
+
+
+
+
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     from form import FormRegister
-    from model import UserReister
+    #from model import UserRegister
     form =FormRegister()
     if form.validate_on_submit():
-        user = UserReister(
+        user = UserRegister(
             username = form.username.data,
             email = form.email.data,
             password = form.password.data
