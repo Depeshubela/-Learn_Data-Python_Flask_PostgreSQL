@@ -1,12 +1,13 @@
 from flask import Flask, render_template
-from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 import os
+from form import FormRegister
+from model import *
 
 
-app = Flask(__name__)
+#app = Flask(__name__)
 Bootstrap(app)
-app.config['SECRET_KEY']='your key'
+#app.config['SECRET_KEY']='your key'
 '''
 #  取得啟動文件資料夾路徑
 pjdir = os.path.abspath(os.path.dirname(__file__))
@@ -38,11 +39,10 @@ with app.app_context():
 '''
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    from form import FormRegister
-    from model import UserReister,db
+
     form =FormRegister()
     if form.validate_on_submit():
-        UserReister()
+        #UserReister()
         user = UserReister(
             username = form.username.data,
             email = form.email.data,
