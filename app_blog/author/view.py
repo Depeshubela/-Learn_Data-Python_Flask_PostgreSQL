@@ -2,7 +2,7 @@ from app_blog import app,db
 from flask import render_template,flash,url_for,redirect
 from app_blog.author.model import UserRegister
 from app_blog.author.form import FormRegister
-from app_blog.sendmail import send_mail
+#from app_blog.sendmail import send_mail
 from app_blog.author.email import send_email
 from flask_login import current_user, login_required,login_user
 from app_blog.author.tokens import generate_confirmation_token,confirm_token

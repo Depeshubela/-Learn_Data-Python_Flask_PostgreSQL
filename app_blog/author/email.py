@@ -6,7 +6,7 @@ from app_blog import mail,app
 def send_email(to, subject, template):
     msg = Message(
         subject,
-        recipients=['AFD3456789LE@gmail.com'],
+        recipients=[to],
         html=template,
         sender=app.config['MAIL_DEFAULT_SENDER']
     )
