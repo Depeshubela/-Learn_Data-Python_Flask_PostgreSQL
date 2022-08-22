@@ -48,7 +48,7 @@ def register():
                 )
         
         '''
-        return '去驗證信箱ra'
+        return '<font size="7">去驗證信箱RA</font>'
 
 
         
