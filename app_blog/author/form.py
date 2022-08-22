@@ -19,7 +19,7 @@ class FormRegister(FlaskForm):
     ])
     password = PasswordField('PassWord', validators=[
         validators.DataRequired(),
-        validators.Length(5, 10),
+        validators.Length(5, 20),
         validators.EqualTo('password2', message='PASSWORD NEED MATCH')
     ])
     password2 = PasswordField('Confirm PassWord', validators=[
