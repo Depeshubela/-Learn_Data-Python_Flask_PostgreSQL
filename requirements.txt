@@ -29,5 +29,4 @@ Werkzeug
 email_validator
 username_validator
 Flask-Bcrypt
-Functools
 itsdangerous
