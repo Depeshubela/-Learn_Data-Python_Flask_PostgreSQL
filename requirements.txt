@@ -28,3 +28,7 @@ psycopg2
 Werkzeug
 email_validator
 username_validator
+Flask-Bcrypt
+Threading
+Functools
+itsdangerous

@@ -1,5 +1,5 @@
 from app_blog import app
-from flask import Flask, url_for, request, redirect  
+from flask import  url_for, request, redirect  
 from flask_login import LoginManager, UserMixin, login_user, current_user, login_required, logout_user  
 
 login_manager = LoginManager(app)  
