@@ -53,4 +53,4 @@ class UserRegister(db.Model):
 
     from itsdangerous import URLSafeTimedSerializer
     
-#db.create_all()
+db.create_all()
