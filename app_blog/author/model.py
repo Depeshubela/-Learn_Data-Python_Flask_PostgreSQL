@@ -52,10 +52,5 @@ class UserRegister(db.Model):
         return 'username:%s, email:%s' % (self.username, self.email)
 
     from itsdangerous import URLSafeTimedSerializer
-
-
-
-
-
     
 db.create_all()
