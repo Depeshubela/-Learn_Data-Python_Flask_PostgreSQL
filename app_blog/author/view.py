@@ -27,7 +27,7 @@ def register():
         token = generate_confirmation_token(user.email)
         confirm_url = url_for('confirm_email', token=token, _external=True)
         html = render_template('author/mail/activate.html', confirm_url=confirm_url)
-        subject = "Please confirm your email"
+        subject = "來自新寶島的愛"
         send_email(user.email, subject, html)
         login_user(user)
         '''
@@ -48,7 +48,7 @@ def register():
                 )
         
         '''
-        return 'Success Thank You'
+        return '去驗證信箱ra'
 
 
         
@@ -62,10 +62,10 @@ def confirm_email(token):
     try:
         email = confirm_token(token)
     except:
-        flash('The confirmation link is invalid or has expired.', 'danger')
+        flash('NTM也拖太久了，都多久了才來驗證，給我重來', 'danger')
     user = UserRegister.query.filter_by(email=email).first_or_404()
     if user.confirmed:
-        flash('Account already confirmed. Please login.', 'success')
+        flash('已經驗證了，去登入阿匪類', 'success')
     else:
         user.confirmed = True
         user.confirmed_on = datetime.datetime.now()
