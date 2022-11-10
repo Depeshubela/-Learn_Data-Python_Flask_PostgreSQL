@@ -11,8 +11,9 @@ app = Flask(__name__)
 #  新版本的部份預設為none，會有異常，再設置True即可。
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 #  設置sqlite檔案路徑
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
-    os.path.join(pjdir, 'data.sqlite')
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
+    #os.path.join(pjdir, 'data.sqlite')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://pevhejgfzgogsk:265bf34b2b464bdb35a128b4241346a28d600c6741a3b151a05e15aab0b0c762@    ec2-52-70-86-157.compute-1.amazonaws.com:5432/dfcoadhf47jppl'
 
 db = SQLAlchemy(app)
 
