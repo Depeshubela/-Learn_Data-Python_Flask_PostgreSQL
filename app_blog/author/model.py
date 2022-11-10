@@ -1,15 +1,14 @@
-from app_blog import db, bcrypt
+from app_blog import db, bcrypt,login
 from six import text_type
+from flask_login import UserMixin
 
-
-
-class UserRegister(db.Model):
+class UserRegister(UserMixin,db.Model):
     #  如果沒有設置__tablename__的話會依class的名稱產生table name
     __tablename__ = 'UserRegisters'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(30), unique=True, nullable=False)
     email = db.Column(db.String(50), unique=True, nullable=False)
-    password_hash = db.Column(db.String(200), nullable=False) 
+    password_hash = db.Column(db.String(50), nullable=False) 
     confirmed = db.Column(db.Boolean, nullable=False, default=False)
     confirmed_on = db.Column(db.DateTime, nullable=True)
 
@@ -51,6 +50,16 @@ class UserRegister(db.Model):
     def __repr__(self):
         return 'username:%s, email:%s' % (self.username, self.email)
 
-    from itsdangerous import URLSafeTimedSerializer
+    
+
+
+    
+
+
+@login.user_loader  
+def load_user(user_id):  
+    return UserRegister.query.get(int(user_id))
+
+from itsdangerous import URLSafeTimedSerializer
     
 db.create_all()
