@@ -12,10 +12,11 @@ app.config.from_object(Config)
 
 login = LoginManager(app)  
 login.login_view = 'login'
-app.config['SQLALCHEMY_DATABASE_URI']
-app.config['SECRET_KEY']
+
 mail = Mail(app)
 bootstrap = Bootstrap(app)
+app.config['SQLALCHEMY_DATABASE_URI']
+app.config['SECRET_KEY']
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 bcrypt = Bcrypt(app)
