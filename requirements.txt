@@ -24,7 +24,7 @@ html5lib
 itsdangerous
 six
 gunicorn
-psycopg2
+psycopg2-binary
 Werkzeug
 email_validator
 username_validator

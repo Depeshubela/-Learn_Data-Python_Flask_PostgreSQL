@@ -5,11 +5,14 @@ from app_blog.author.form import FormRegister,FormLogin, FormChangePWD,FormReset
 from app_blog.author.email import send_email
 from flask_login import current_user, login_required,login_user,logout_user
 from app_blog.author.tokens import generate_confirmation_token,confirm_token,reset_token
-import datetime
+import datetime,time
 
 #註冊介面
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+
     form = FormRegister()
 
     if form.validate_on_submit():
@@ -37,6 +40,10 @@ def register():
         
     return render_template('author/register.html', form=form)
 
+
+
+
+
 #驗證信連結點擊後
 @app.route('/register/<token>')
 @login_required
@@ -54,11 +61,13 @@ def confirm_email(token):
         db.session.add(user)
         db.session.commit()
         flash('You have confirmed your account. Thanks!', 'success')
-    return render_template('author/mail/welcome.html')
+    return redirect(url_for('index'))
 
 #登入介面
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
     form = FormLogin()
     if form.validate_on_submit():
         #  當使用者按下login之後，先檢核帳號是否存在系統內。
@@ -66,6 +75,7 @@ def login():
         if user:
             #  當使用者存在資料庫內再核對密碼是否正確。
             if user.check_password(form.password.data):
+
                 #  加入參數『記得我』
                 login_user(user, form.remember_me.data)
                 #  使用者登入之後，將使用者導回來源url。
@@ -77,6 +87,7 @@ def login():
                     return 'Bad Boy!!'
                 return redirect(next or url_for('index'))
                 # return 'Welcome' + current_user.username
+                
             else:
                 #  如果密碼驗證錯誤，就顯示錯誤訊息。
                 flash('Wrong Email or Password')
@@ -126,7 +137,7 @@ def userinfo():
 
 #如果未驗證帳號操作會被此攔截要求驗證
 @app.before_request
-def before_request(): #
+def before_request(): 
     """
     在使用者登入之後，需做一個帳號是否啟動的驗證，啟動之後才能向下展開相關的應用。
     條件一：需登入
@@ -136,7 +147,7 @@ def before_request(): #
     """
     if (current_user.is_authenticated and
             not current_user.confirmed and #登入但未確認
-            request.endpoint not in ['re_userconfirm', 'logout', 'user_confirm','reset_password'] and #例外清單
+            request.endpoint not in ['re_userconfirm', 'logout', 'user_confirm','reset_password','confirm_email','register'] and #例外清單
             request.endpoint != 'static'):
         #  條件滿足就引導至未啟動說明
         flash('Hi, please activate your account first. Your endpoint:%s' % request.endpoint)
@@ -176,7 +187,8 @@ def changepassword():
             db.session.add(current_user)
             db.session.commit()
             flash('You Have Already Change Your Password, Please Login Again.')
-            return 'Log Out Please Relogin'
+            time.sleep(2)
+            return redirect(url_for('logout'))
         else:
             flash('Wrong Old Password...')
     return render_template('author/changepassword.html', form=form)
@@ -185,9 +197,8 @@ def changepassword():
 @app.route('/resetpassword', methods=['GET', 'POST'])
 def reset_password():
     #  只允許未登入的匿名帳號可以申請遺失密碼
-    if not current_user.is_anonymous:
+    if current_user.is_authenticated:
         return redirect(url_for('index'))
-
     form = FormResetMail()
     if form.validate_on_submit():
         #  取得使用者資料

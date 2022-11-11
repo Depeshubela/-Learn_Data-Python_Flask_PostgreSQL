@@ -23,9 +23,11 @@
         <li><a href="{{ url_for('userinfo') }}">USERINFO</a></li>
         <!-- 透過url_for設定LOGOUT連結綁定LOGOUT -->
         <li><a href="{{ url_for('logout') }}">LOGOUT</a></li>
+        <li><a href="{{ url_for('changepassword') }}">CHANGPASSWORD</a></li>
         {% else %}
         <!-- 透過url_for設定LOGIN連結綁定LOGIN -->
         <li><a href="{{ url_for('login') }}">LOGIN</a></li>
+
       </ul>
         {% endif %}
     </div><!-- /.navbar-collapse -->

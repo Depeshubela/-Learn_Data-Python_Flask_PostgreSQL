@@ -1,6 +1,7 @@
-from app_blog import db, bcrypt,login
+from app_blog import db, bcrypt,login,app
 from six import text_type
 from flask_login import UserMixin
+
 
 class UserRegister(UserMixin,db.Model):
     #  如果沒有設置__tablename__的話會依class的名稱產生table name
@@ -47,19 +48,16 @@ class UserRegister(UserMixin,db.Model):
         return '<User %r>' %(self.name)
 
 
+
     def __repr__(self):
         return 'username:%s, email:%s' % (self.username, self.email)
 
-    
-
-
-    
 
 
 @login.user_loader  
 def load_user(user_id):  
     return UserRegister.query.get(int(user_id))
 
-from itsdangerous import URLSafeTimedSerializer
+
     
 db.create_all()

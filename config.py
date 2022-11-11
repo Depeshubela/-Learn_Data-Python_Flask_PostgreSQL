@@ -6,8 +6,7 @@ class Config:
     DEBUG = True
     SQLALCHEMY_TRACK_MODIFICATIONS = True
     #SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.abspath(os.path.dirname(__file__)) + "/app_blog/static/data/data_register.sqlite"
-    SQLALCHEMY_DATABASE_URI = 'postgresql://pevhejgfzgogsk:265bf34b2b464bdb35a128b4241346a28d600c6741a3b151a05e15aab0b0c762@ec2-52-70-86-157.compute-1.amazonaws.com:5432/dfcoadhf47jppl'
-
+    SQLALCHEMY_DATABASE_URI = 'postgresql://pevhejgfzgogsk:265bf34b2b464bdb35a128b4241346a28d600c6741a3b151a05e15aab0b0c762@ec2-52-70-86-157.compute-1.amazonaws.com:5432/dfcoadhf47jppl' 
     SECRET_KEY = b'\xb9k\xdf@\x0e\x1f(\xf2\xb0\xd0\xcb?Y\xdcN\x19G\x12e\xa8\x8b\xe5\xccS'
 
     #class EmailConfig:
