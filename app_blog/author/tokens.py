@@ -8,7 +8,7 @@ def generate_confirmation_token(email):
     serializer = URLSafeTimedSerializer(app.config['SECRET_KEY'])
     return serializer.dumps(email, salt=app.config['SECURITY_PASSWORD_SALT'])
 
-
+'''
 def confirm_token(self):
     serializer = URLSafeTimedSerializer(current_app.config['SECRET_KEY'])
     
@@ -26,7 +26,7 @@ def confirm_token(token, expiration=3600):
     except:
         return False
     return email
-'''
+
 
 def reset_token(token):
    
