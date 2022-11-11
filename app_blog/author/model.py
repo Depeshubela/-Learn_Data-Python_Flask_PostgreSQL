@@ -60,4 +60,5 @@ def load_user(user_id):
 
 
     
-db.create_all()
+with app.app_context():
+    db.create_all()
