@@ -1,7 +1,7 @@
 from itsdangerous import URLSafeTimedSerializer,BadSignature,SignatureExpired
 
 from app_blog import app
-from flask import current_app
+#from flask import current_app
 
 
 def generate_confirmation_token(email):
