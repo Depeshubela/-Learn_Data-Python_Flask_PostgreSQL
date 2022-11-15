@@ -6,5 +6,9 @@
 *忘記密碼找回  
 *帳號密碼細節(重複輸入密碼是否相符、是否重複、是否有此帳號等)  
   
-https://python-try-xyp1.herokuapp.com/login  
+範例:https://python-try-xyp1.herokuapp.com/login  
 待更新
+  
+    
+      
+學習資源:https://hackmd.io/@shaoeChen/HJiZtEngG/https%3A%2F%2Fhackmd.io%2Fs%2FS1dY8vepQ
