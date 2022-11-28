@@ -6,8 +6,7 @@
 *忘記密碼找回  
 *帳號密碼細節(重複輸入密碼是否相符、是否重複、是否有此帳號等)  
   
-範例:https://python-try-xyp1.herokuapp.com/login  
-待更新
+此project停止更新，最新請至WorkProject: https://github.com/Depeshubela/Work_Project
   
   
   
